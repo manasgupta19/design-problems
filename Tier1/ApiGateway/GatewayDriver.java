@@ -5,10 +5,20 @@ import Tier1.ApiGateway.model.HttpResponse;
 import Tier1.ApiGateway.service.APIGatewayEngine;
 import java.util.*;
 
-
 public class GatewayDriver {
     public static void main(String[] args) throws InterruptedException {
-        APIGatewayEngine gateway = new APIGatewayEngine();
+        // 0. Configuration & Wiring (Composition Root)
+        Tier1.ApiGateway.registry.RouteRegistry registry = new Tier1.ApiGateway.registry.RouteRegistry();
+        registry.addRoute("/api/orders", new Tier1.ApiGateway.model.RouteConfig("order-service", true, 5));
+        registry.addRoute("/api/public", new Tier1.ApiGateway.model.RouteConfig("public-service", false, 100));
+
+        List<Tier1.ApiGateway.filter.GatewayFilter> filters = new ArrayList<>();
+        filters.add(new Tier1.ApiGateway.filter.SSLTerminationFilter());
+        filters.add(new Tier1.ApiGateway.filter.RoutingFilter(registry));
+        filters.add(new Tier1.ApiGateway.filter.AuthenticationFilter());
+        filters.add(new Tier1.ApiGateway.filter.RateLimitFilter());
+
+        APIGatewayEngine gateway = new APIGatewayEngine(filters);
 
         // Scenario 1: Valid Authenticated Request
         System.out.println("--- 1. Happy Path ---");
@@ -29,7 +39,7 @@ public class GatewayDriver {
         System.out.println("\n--- 3. Rate Limit Attack (Limit 5 RPS) ---");
         for (int i = 0; i < 7; i++) {
             HttpResponse r = gateway.handleRequest(new HttpRequest("/api/orders", headers, "192.168.1.50"));
-            System.out.println("Req " + (i+1) + ": " + r.getStatusCode());
+            System.out.println("Req " + (i + 1) + ": " + r.getStatusCode());
         }
     }
 }

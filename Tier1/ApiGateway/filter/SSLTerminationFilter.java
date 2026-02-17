@@ -6,7 +6,9 @@ import Tier1.ApiGateway.model.HttpResponse;
 // A. SSL Termination (Simulated)
 public class SSLTerminationFilter implements GatewayFilter {
     @Override
-    public String getName() { return "SSL Terminator"; }
+    public String getName() {
+        return "SSL Terminator";
+    }
 
     @Override
     public void execute(GatewayContext ctx) {
