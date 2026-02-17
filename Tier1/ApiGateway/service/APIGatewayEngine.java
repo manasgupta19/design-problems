@@ -4,9 +4,6 @@ import Tier1.ApiGateway.model.GatewayContext;
 import Tier1.ApiGateway.model.HttpRequest;
 import Tier1.ApiGateway.model.HttpResponse;
 import Tier1.ApiGateway.filter.GatewayFilter;
-import Tier1.ApiGateway.model.GatewayContext;
-import Tier1.ApiGateway.model.HttpRequest;
-import Tier1.ApiGateway.model.HttpResponse;
 import java.util.List;
 
 // ---------------------------------------------------------
