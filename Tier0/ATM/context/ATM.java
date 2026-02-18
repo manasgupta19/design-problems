@@ -3,7 +3,7 @@ package Tier0.ATM.context;
 import Tier0.ATM.model.BankSwitch;
 import Tier0.ATM.model.CashDispenser;
 import Tier0.ATM.state.ATMState;
-import Tier0.VendingMachine.state.IdleState;
+import Tier0.ATM.state.IdleState;
 
 public // ---------------------------------------------------------
 // 3. THE CONTEXT (The ATM Machine)
