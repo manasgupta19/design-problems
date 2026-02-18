@@ -1,10 +1,11 @@
 package Tier0.VendingMachine.state;
 
+import Tier0.ATM.state.ATMState;
 import Tier0.VendingMachine.model.Coin;
 import Tier0.VendingMachine.model.Product;
 import Tier0.VendingMachine.service.VendingMachine;
 
-public class IdleState implements State {
+public class IdleState implements State, ATMState {
     @Override
     public void insertCoin(VendingMachine machine, Coin coin) {
         System.out.println("Coin inserted: " + coin);
