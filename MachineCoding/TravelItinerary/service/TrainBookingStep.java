@@ -1,6 +1,5 @@
 package MachineCoding.TravelItinerary.service;
 
-import MachineCoding.TravelItinerary.dto.HotelBookingResult;
 import MachineCoding.TravelItinerary.dto.TrainBookingRequest;
 import MachineCoding.TravelItinerary.dto.TrainBookingResult;
 import MachineCoding.TravelItinerary.exception.SagaCompensationException;
